@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="shortcut icon" type="x-icon" href="Icon.png">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buy Me Only</title>
+    <style>
+        /* Body styling */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(45deg, #ff5f6d, #ffc371); /* Gradient background */
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        /* Watermark background */
+        body::before {
+            content: ""; /* Text for the watermark */
+            font-size: 40px;
+            color: rgba(0, 0, 0, 0.1); /* Light color for the watermark */
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-repeat: repeat;
+            background-image: repeating-linear-gradient(
+                45deg, 
+                rgba(0, 0, 0, 0.1) 0, 
+                rgba(0, 0, 0, 0.1) 10px, 
+                transparent 30px, 
+                transparent 50px
+            );
+            z-index: 0; /* Set behind the login form */
+        }
+
+        /* Circular image in the corner */
+        .corner-image {
+            position: absolute;
+            border-radius: 50%; /* Makes the image circular */
+            border: 0px solid white; /* Optional border around the image */
+            z-index: 2; /* Set above the watermark */
+            box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.2); /* Optional shadow for aesthetics */
+        }
+
+        /* Positioning for each corner image */
+        .top-right {
+            width: 300px; 
+            height: 300px;
+            top: 60px;
+            right: 200px;
+        }
+
+        .top-left {
+            width: 400px; 
+            height: 400px;
+            top: 30px;
+            left: 80px;
+        }
+
+        .bottom-right {
+            width: 400px; 
+            height: 400px;
+            bottom: 20px;
+            right: 50px;
+        }
+
+        .bottom-left {
+            width: 300px; 
+            height: 300px;
+            bottom: 50px;
+            left: 200px;
+        }
+
+        /* Main login wrapper */
+        .login-wrapper {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 30px 30px 8px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            width: 100%;
+            height: 30%;
+            max-width: 700px; /* Max width to control layout stretching */
+            z-index: 1; /* Place on top of the watermark */
+            position: relative;
+        }
+
+        /* Image container */
+        .image-container {
+            flex: 1;
+            margin-right: 40px;
+        }
+
+        .image-container img {
+            width: 100%;
+            max-width: 500px;
+        }
+
+        /* Login form container */
+        .login-container {
+            flex: 1;
+            max-width: 300px;
+            text-align: center;
+        }
+
+        /* Title styling */
+        h2 {
+            font-size: 30px;
+            margin-top: -3%;
+        }
+
+        /* Input container */
+        .input-container {
+            position: relative;
+            width: 100%;
+            margin-bottom: 6px;
+        }
+
+        /* Input fields */
+        input[type="text"], input[type="password"] {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 30px;
+            box-sizing: border-box;
+            font-size: 16px;
+            margin-bottom: 15px;
+        }
+
+        /* Toggle password button */
+        .toggle-password {
+            width: 15%;
+            position: absolute;
+            right: 6px;
+            top: 5px;
+            cursor: pointer;
+            background: #ffffff;
+            border: none;
+            padding: 0;
+            font-size: 14px;
+            color: #f25c18;
+        }
+
+        .toggle-password:hover {
+            background: none; /* Remove hover background */
+            color: #145dbf;   /* Optional: change color on hover */
+        }
+
+        /* Login button */
+        button {
+            width: 100%;
+            background-color: #f25c18;
+            color: white;
+            padding: 14px;
+            font-size: 16px;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background-color: #145dbf;
+        }
+
+        /* Links */
+        a {
+            display: block;
+            margin-top: 12px;
+            color: #f25c18;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        a:hover {
+            transform: scale(1.1);
+            text-decoration: underline;
+            color: #145dbf;
+        }
+    </style>
+</head>
+<body>
+    <!-- Circular images in each corner -->
+    <img src="img1.jpg" alt="Corner Image 1" class="corner-image top-right" />
+    <img src="img2.jpg" alt="Corner Image 2" class="corner-image top-left" />
+    <img src="img3.jpg" alt="Corner Image 3" class="corner-image bottom-right" />
+    <img src="img4.jpg" alt="Corner Image 4" class="corner-image bottom-left" />
+
+    <div class="login-wrapper">
+        <!-- Image container -->
+        <div class="image-container">
+            <img src="Logo.png" alt="Buy Me Only Logo" />
+        </div>
+
+        <!-- Login container -->
+        <div class="login-container">
+            <h2>Login</h2>
+            
+            <input type="text" id="username" placeholder="Username" maxlength="24" />
+            
+            <div class="input-container">
+                <input type="password" id="password" placeholder="Password" />
+                <button type="button" class="toggle-password" onclick="togglePassword()">Show</button>
+            </div>
+
+            <button onclick="login()">LOGIN</button>
+            <a href="https://shopee.co.th/buyer/reset" target="_blank">Forgot Username / Password?</a>
+            <a href="https://npdnath.github.io/Buy-Me-Only-SignUP/" target="_blank">Create Account</a> 
+
+        </div>
+    </div>
+
+    <script>
+        function togglePassword() {
+            var passwordField = document.getElementById("password");
+            var toggleButton = document.querySelector(".toggle-password");
+            
+            if (passwordField.type === "password") {
+                passwordField.type = "text";
+                toggleButton.textContent = "Hide";
+            } else {
+                passwordField.type = "password";
+                toggleButton.textContent = "Show";
+            }
+        }
+
+        function validatePassword(password) {
+            const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[@#$%^&*!?/+-=_<>():;,."'{}]).{16,32}$/;
+            return regex.test(password);
+        }
+
+        function validateUsername(username) {
+            const firstLetter = username.charAt(0);
+            const regex = /^[a-z]/;
+            return regex.test(firstLetter);
+        }
+
+        function login() {
+            var username = document.getElementById("username").value;
+            var password = document.getElementById("password").value;
+
+            if (username === "" || password === "") {
+                alert("Please fill in both username and password.");
+                return;
+            }
+
+            if (!validateUsername(username)) {
+                alert("Username must start with a lowercase letter.");
+                return;
+            }
+
+            if (!validatePassword(password)) {
+                alert("Password must be between 16 and 32 characters and contain an uppercase letter, a number, and a special character.");
+                return;
+            }
+
+	window.location.href = "https://shopee.co.th/lg_officialstore"; 
+}
+    </script>
+</body>
+</html>
